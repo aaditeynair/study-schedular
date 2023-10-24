@@ -3,27 +3,24 @@
 package main
 
 import (
-	"html/template"
 	"log"
 	"net/http"
 )
 
 // Todo is the basic unit of the app. It is moved around for scheduling
 type Todo struct {
-	Title string
+	Title     string
+	Urgent    bool
+	Important bool
 }
 
-func home(w http.ResponseWriter, _ *http.Request) {
-	tmpl := template.Must(template.ParseFiles("./html/index.html"))
-	todos := map[string][]Todo{
-		"Todos": {
-			{Title: "Hindi Homework"},
-			{Title: "English Worksheetk"},
-			{Title: "Hindi 2 Q/A"},
-		},
+func home(_ http.ResponseWriter, _ *http.Request) {
+	todos := []Todo{
+		{Title: "Hindi Homework"},
+		{Title: "English Worksheetk"},
+		{Title: "Hindi 2 Q/A"},
 	}
 
-	tmpl.Execute(w, todos)
 }
 
 func main() {
